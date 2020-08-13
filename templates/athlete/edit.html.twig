@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2><a href="{{ path('athlete') }}">Athletes</a></h2>
+
+<h1>{{athlete.nom}}</h1>
+<h1>{{athlete.prenom}}</h1>
+
+<h2>Modifier {{athlete.nom}}</h2>
+{{form(form)}}
+
+{% endblock %}

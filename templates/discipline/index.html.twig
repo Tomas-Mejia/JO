@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DisciplineController!{% endblock %}
+
+{% block body %}
+
+    <h2>
+        <a href="{{ path('home') }}">Pays</a> 
+        <a href="{{ path('athlete') }}">Athletes</a> 
+        <a href="{{ path('discipline') }}">Disciplines</a>
+    </h2>
+    <h1>Disciplines</h1>
+    {% if disciplines is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for classe in disciplines %}
+                    <tr>
+                        <td>{{classe.id}}</td>
+                        <td>{{classe.nom}}</td>
+                        <td>
+                            <a href="{{ path('edit_discipline', {'id': classe.id}) }}">Modifier</a>
+                            <br>
+                            <a href="{{ path('delete_discipline', {'id': classe.id}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Il n'y a pas de disciplines</p>
+    {% endif %}
+
+    <h2>Ajouter une discipline</h2>
+    {{ form(form) }}
+
+{% endblock %}

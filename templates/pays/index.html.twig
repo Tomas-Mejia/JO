@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PaysController!{% endblock %}
+
+{% block body %}
+
+
+    <h2>
+        <a href="{{ path('home') }}">Pays</a> 
+        <a href="{{ path('athlete') }}">Athletes</a> 
+        <a href="{{ path('discipline') }}">Disciplines</a>
+    </h2>
+
+
+    {% if payss is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Drapeau</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in payss %}
+                    <tr>
+                        <td>{{p.id}}</td>
+                        <td>{{p.nom}}</td>
+                        <td>
+                            {% if p.drapeau is not null %}
+                                <img src="{{ asset('drapeaux/' ~ p.drapeau) }}">
+                            {% endif %}
+                        </td>                        <td>
+                            <a href="{{ path('edit_pays', {'id': p.id}) }}">Modifier</a>
+                            <br>
+                            <a href="{{ path('delete_pays', {'id': p.id}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Il n'y a pas de pays</p>
+    {% endif %}
+
+    <h2>Ajouter un pays</h2>
+    {{ form(form) }}
+
+{% endblock %}

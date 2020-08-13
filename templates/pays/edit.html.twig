@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h2><a href="{{ path('home') }}">Pays</a></h2>
+
+<h1>{{pays.nom}}</h1>
+
+<h2>Modifier {{pays.nom}}</h2>
+{{form(form)}}
+
+{% endblock %}

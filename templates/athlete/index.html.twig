@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AthleteController!{% endblock %}
+
+{% block body %}
+
+    <h2>
+        <a href="{{ path('home') }}">Pays</a> 
+        <a href="{{ path('athlete') }}">Athletes</a> 
+        <a href="{{ path('discipline') }}">Disciplines</a>
+    </h2>
+    <h1>Athletes</h1>
+
+    {% if athletes is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Photo</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Discipline</th>
+                    <th>Pays</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for classe in athletes %}
+                    <tr>
+                        <td>{{classe.id}}</td>
+                        <td>
+                            {% if classe.photo is not null %}
+                                <img src="{{ asset('drapeaux/' ~ classe.photo) }}" >
+                            {% endif %}
+                        </td>
+                        <td>{{classe.nom}}</td>
+                        <td>{{classe.prenom}}</td>
+                        <td>{{classe.discipline.nom}}</td>
+                        <td>
+                            {% if classe.pays.drapeau is not null %}
+                                <img src="{{ asset('drapeaux/' ~ classe.pays.drapeau) }}">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('edit_athlete', {'id': classe.id}) }}">Modifier</a>
+                            <br>
+                            <a href="{{ path('delete_athlete', {'id': classe.id}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Il n'y a pas d'athletes</p>
+    {% endif %}
+
+    <h2>Ajouter un athlete</h2>
+    {{ form(form) }}
+
+{% endblock %}
